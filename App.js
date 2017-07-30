@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, Button, Alert } from 'react-native';
 import { Constants, MapView } from 'expo';
 
+import * as firebase from 'firebase';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDlntIfARaHOjLfnBZ9gYRpiQZI6Sf9p80",
+  authDomain: "staging-f322b.firebaseapp.com",
+  databaseURL: "https://staging-f322b.firebaseio.com",
+  storageBucket: "",
+  messagingSenderId: "529805306314"
+};
+
+firebase.initializeApp(firebaseConfig);
+
 export class HypeButton extends Component {
   render() {
     return (
