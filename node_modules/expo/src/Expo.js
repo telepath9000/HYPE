@@ -11,14 +11,17 @@ if (typeof manifest.env === 'object') {
   Object.assign(process.env, manifest.env);
 }
 
+// NOTE(brentvatne): this is temporarily disabled until we can work out bugs
+// with ref and context
+//
 // Re-define the React Native modal to use our version of it, which plays
 // nicely with the Expo Menu on iOS
 // $FlowFixMe
-Object.defineProperty(ReactNative, 'Modal', {
-  get() {
-    return require('./Modal/Modal').default;
-  },
-});
+// Object.defineProperty(ReactNative, 'Modal', {
+//   get() {
+//     return require('./Modal/Modal').default;
+//   },
+// });
 
 module.exports = {
   // constants

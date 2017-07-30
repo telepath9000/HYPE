@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://r6-ed5.blockco.lyft-hacks.exp.direct",
-  "packagerNgrokUrl": "https://packager.r6-ed5.blockco.lyft-hacks.exp.direct",
-  "ngrokPid": 9263,
-  "packagerPort": 19002,
-  "packagerPid": 9245
+  "expoServerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "packagerPort": null,
+  "packagerPid": null
 }
