@@ -5,12 +5,11 @@ import { Constants } from 'expo';
 import * as firebase from 'firebase'; // 4.2.0
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD-MTg-vjAzSv46zMmceBGZrkrB_ZWZj6w",
-  authDomain: "hype-9758f.firebaseapp.com",
-  databaseURL: "https://hype-9758f.firebaseio.com",
-  storageBucket: "hype-9758f.appspot.com",
+        apiKey: "AIzaSyA78htuLAZ-1aBxQNIj9-ZDawnx1Jrgk0I",
+		    authDomain: "hype-635d3.firebaseapp.com",
+		    databaseURL: "https://hype-635d3.firebaseio.com",
+		    storageBucket: "hype-635d3.appspot.com"
 };
-
 
 try{
  firebase.initializeApp(firebaseConfig);
@@ -21,6 +20,16 @@ catch(err)
 }
 
 const firebaseApp = firebase;
+const itemsRef = firebaseApp.database().ref();
+		var rootRef = firebase.database().ref();
+		/* example of how to set value to the database
+		itemsRef.child('/tester').set({
+			beef: "boos",
+			chicken: "yoos"
+		});*/
+
+
+//const firebaseApp = firebase;
 
 export class HypeGrid extends Component {
   render() {
@@ -37,6 +46,12 @@ export class HypeButton extends Component {
   _handleHypePress = () => {
     Alert.alert(
       'HYPE HYPE HYPE')
+
+    itemsRef.child('/tester').push({
+			hack: "fun",
+			love: "great"
+		});
+
   }
   render() {
     return (
@@ -58,6 +73,15 @@ export class BottomBar extends Component {
       'Button pressed!',
       'You did it!',
     );
+
+
+	itemsRef.child('/tester').push({
+			stew: "yes",
+			cool: "poop"
+		});
+
+
+
   };
 
   render() {
