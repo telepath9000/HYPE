@@ -1,61 +1,87 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, StyleSheet, Button, Alert } from 'react-native';
+import { Constants, MapView } from 'expo';
 
-export default class App extends React.Component {
+export class HypeButton extends Component {
+  render() {
+    return (
+      <View style={styles.hype_button}>
+      <Text>
+      SMASH THAT MF HYPE BUTTON!
+      </Text>
+      </View>)
+  }
+}
 
-	_handleGoogleLogin = async() => {
-		try {
-			const {type, user} = await Google.logInAsync({
-				androidStandaloneAppClientId: '<ANDROID_CLIENT_ID>',
-				iosStandAloneAppClientId: '<IOS_CLIENT_DI>',
-				androidClientId: '603386649315-9rbv8vmv2vvftetfbvlrbufcps1fajqf.apps.googleusercontent.com',
-				iosClientId: '603386649315-vp4revvrcgrcjme51ebuhbkbspl048l9.apps.googleusercontent.com',
-				scopes: ['profile', 'email']
-			});
+export class BottomBar extends Component {
+  _handleButtonPress = () => {
+    Alert.alert(
+      'Button pressed!',
+      'You did it!',
+    );
+  };
 
-			switch (type) {
-				case 'succces': {
-					Alert.alert(
-						'logged in',
-						'Hi ${user.name}!',
-					);
-					break ;
-				}
-				case 'cancel': {
-					Alert.alert(
-						'cancelled!',
-						'Login was cancelled!',
-					);
-					break ;
-				}
-				default: {
-					Alert.alert(
-						'oops',
-						'Login failed!',
-					);
-				}
-			};
+  render() {
+    return (
+      <View style={styles.bottom_bar}>
+      <Button
+        title="Top"
+        onPress={this._handleButtonPress}
+      />
+      <Button
+        title="Map"
+        onPress={this._handleButtonPress}
+      />
+      <Button
+        title="Rising"
+        onPress={this._handleButtonPress}
+      />
+      </View>
 
-			render() {
-				return (
-					<View style={styles.container}>
-						<Text style={styles.paragraph}>
-						Do things
-						<Button
-					title="Login wit g-money"
-					onPress={this._handleGoogleLogin}
-						/>
-						</Text>
-						</View>
-				);
-			}
-		}
+      );
+  }
+}
 
-		const styles = StyleSheet.create({
-			container: {
-				flex: 1,
-				backgroundColor: '#fff',
-				alignItems: 'center',
-				justifyContent: 'center',
-			},
-		});
+export default class App extends Component {
+  state = {
+    mapRegion: { latitude: 37.78825, longitude: -122.4324, latitudeDelta: 0.0922, longitudeDelta: 0.0421 }
+  };
+
+  _handleMapRegionChange = mapRegion => {
+    this.setState({ mapRegion });
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+      <MapView
+        style={{ alignSelf: 'stretch', height: 200 }}
+        region={this.state.mapRegion}
+        onRegionChange={this._handleMapRegionChange}
+      />
+      <HypeButton
+      />
+      <BottomBar
+      />
+      </View>
+
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#ecf0f1',
+  },
+  bottom_bar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  hype_button : {
+    alignItems: 'center',
+  }
+});
