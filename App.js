@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Button, Alert, Image, TouchableHighlight, ListView, ScrollView} from 'react-native';
 import { Constants } from 'expo';
-import FadeIn from 'react-native-fade-in-image';
- // 1.0.3
 
-import * as firebase from 'firebase';
- // 4.2.0
+import * as firebase from 'firebase'; // 4.2.0
 
 const firebaseConfig = {
         apiKey: "AIzaSyA78htuLAZ-1aBxQNIj9-ZDawnx1Jrgk0I",
@@ -62,7 +59,7 @@ export class HypeButton extends Component {
       <TouchableHighlight onPress = {this._handleHypePress}
       underlayColor='red'>
         <Image
-          source={{ uri: 'http://anotherkind.co.uk/wp-content/uploads/2015/06/Hype-Logo-Red.jpg' }}
+          source={{ uri: 'http://i.imgur.com/P5LVcrr.png' }}
           style={{ height: 140, width: 200 }}
         />
       </TouchableHighlight>
@@ -163,7 +160,6 @@ export default class App extends Component {
   }
   render() {
     return (
-      <FadeIn>
       <View style={styles.container}>
       <ScrollingMapView
       />
@@ -172,7 +168,6 @@ export default class App extends Component {
       <BottomBar
       />
       </View>
-      </FadeIn>
     );
   }
 }
@@ -186,10 +181,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    bottom: 80
   },
   hype_button : {
     alignItems: 'center',
-    bottom: 70
+    bottom: 80,
   },
   scrollMapViewContent: {
      width             : 1185,  // <--- set the max width of the scrolled content
