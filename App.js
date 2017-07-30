@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Button, Alert, Image, TouchableHighlight, ListView} from 'react-native';
+import { Text, View, StyleSheet, Button, Alert, Image, TouchableHighlight, ListView, ScrollView} from 'react-native';
 import { Constants } from 'expo';
+import FadeIn from 'react-native-fade-in-image';
+ // 1.0.3
 
-import * as firebase from 'firebase'; // 4.2.0
+import * as firebase from 'firebase';
+ // 4.2.0
 
 const firebaseConfig = {
         apiKey: "AIzaSyA78htuLAZ-1aBxQNIj9-ZDawnx1Jrgk0I",
@@ -55,14 +58,15 @@ export class HypeButton extends Component {
   }
   render() {
     return (
+      <View style = {styles.hype_button}>
       <TouchableHighlight onPress = {this._handleHypePress}
-      underlayColor='red'
-      style = {styles.hype_button}>
+      underlayColor='red'>
         <Image
           source={{ uri: 'http://anotherkind.co.uk/wp-content/uploads/2015/06/Hype-Logo-Red.jpg' }}
           style={{ height: 140, width: 200 }}
         />
       </TouchableHighlight>
+      </View>
       );
   }
 }
@@ -79,9 +83,6 @@ export class BottomBar extends Component {
 			stew: "yes",
 			cool: "poop"
 		});
-
-
-
   };
 
   render() {
@@ -102,6 +103,24 @@ export class BottomBar extends Component {
       </View>
 
       );
+  }
+}
+
+export class ScrollingMapView extends Component {
+  render(){
+    return (
+    <ScrollView horizontal={true}
+    contentContainerStyle = {styles.scrollMapViewContent}
+    showsHorizontalScrollIndicator = {false}
+    showsVerticalScrollIndicator = {false}
+    overScrollMode = 'never'
+    backgroundColor = '#719263'>
+    <Image
+           style={{flex:1, height: undefined, width: undefined}}
+          source={{ uri: 'https://image.ibb.co/dXScZk/outsidelands.png' }}
+        />
+    </ScrollView>
+    );
   }
 }
 
@@ -144,35 +163,36 @@ export default class App extends Component {
   }
   render() {
     return (
+      <FadeIn>
       <View style={styles.container}>
-        <Image
-           style={{flex:1, height: undefined, width: undefined}}
-          source={{ uri: 'https://www.sfoutsidelands.com/uploads/MobileMap12000x12000_img.jpg' }}
-        />
-      <Text>
-      </Text>
+      <ScrollingMapView
+      />
       <HypeButton
       />
       <BottomBar
       />
       </View>
+      </FadeIn>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: '#719263',
   },
   bottom_bar: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   hype_button : {
     alignItems: 'center',
-  }
+    bottom: 70
+  },
+  scrollMapViewContent: {
+     width             : 1185,  // <--- set the max width of the scrolled content
+     height            : 459,  // <--- set the max height of the scrolled content
+   },
 });
