@@ -1,54 +1,32 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Button, Alert, Image, TouchableHighlight, ListView} from 'react-native';
-import { Constants } from 'expo';
+import { Text, View, StyleSheet, Button, Alert } from 'react-native';
+import { Constants, MapView } from 'expo';
 
 import * as firebase from 'firebase'; // 4.2.0
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD-MTg-vjAzSv46zMmceBGZrkrB_ZWZj6w",
-  authDomain: "hype-9758f.firebaseapp.com",
-  databaseURL: "https://hype-9758f.firebaseio.com",
-  storageBucket: "hype-9758f.appspot.com",
+  apiKey: "AIzaSyDlntIfARaHOjLfnBZ9gYRpiQZI6Sf9p80",
+  authDomain: "staging-f322b.firebaseapp.com",
+  databaseURL: "https://staging-f322b.firebaseio.com",
+  storageBucket: "",
+  messagingSenderId: "529805306314"
 };
-
-
 try{
- firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 }
-catch(err)
+catch (err)
 {
-  //fadsfa
-}
-
-const firebaseApp = firebase;
-
-export class HypeGrid extends Component {
-  render() {
-    return (
-      <View>
-      <Text>
-      </Text>
-      </View>
-      );
-  }
+  //ggsg
 }
 
 export class HypeButton extends Component {
-  _handleHypePress = () => {
-    Alert.alert(
-      'HYPE HYPE HYPE')
-  }
   render() {
     return (
-      <TouchableHighlight onPress = {this._handleHypePress}
-      underlayColor='red'
-      style = {styles.hype_button}>
-        <Image
-          source={{ uri: 'http://anotherkind.co.uk/wp-content/uploads/2015/06/Hype-Logo-Red.jpg' }}
-          style={{ height: 140, width: 200 }}
-        />
-      </TouchableHighlight>
-      );
+      <View style={styles.hype_button}>
+      <Text>
+      adsfadsfasfd
+      </Text>
+      </View>)
   }
 }
 
@@ -82,56 +60,28 @@ export class BottomBar extends Component {
 }
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      })
-    };
-    this.itemsRef = this.getRef().child('items');
-  }
+  state = {
+    mapRegion: { latitude: 37.78825, longitude: -122.4324, latitudeDelta: 0.0922, longitudeDelta: 0.0421 }
+  };
 
-  getRef() {
-    return firebaseApp.database().ref();
-  }
+  _handleMapRegionChange = mapRegion => {
+    this.setState({ mapRegion });
+  };
 
-  listenForItems(itemsRef) {
-    itemsRef.on('value', (snap) => {
-
-      // get children as an array
-      var items = [];
-      snap.forEach((child) => {
-        items.push({
-          title: child.val().title,
-          _key: child.key
-        });
-      });
-
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(items)
-      });
-
-    });
-  }
-
-  componentDidMount() {
-    this.listenForItems(this.itemsRef);
-  }
   render() {
     return (
       <View style={styles.container}>
-        <Image
-           style={{flex:1, height: undefined, width: undefined}}
-          source={{ uri: 'https://www.sfoutsidelands.com/uploads/MobileMap12000x12000_img.jpg' }}
-        />
-      <Text>
-      </Text>
+      <MapView
+        style={{ alignSelf: 'stretch', height: 200 }}
+        region={this.state.mapRegion}
+        onRegionChange={this._handleMapRegionChange}
+      />
       <HypeButton
       />
       <BottomBar
       />
       </View>
+
     );
   }
 }
