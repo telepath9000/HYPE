@@ -1,4 +1,5 @@
 # outside hacks 2017: HYPE demo
+![screenshot](/hype_preview.gif)
 ## Description
 HYPE takes you to the party.  It's a real-time geolocation excitement meter designed to allow users to promote their current location and find the what everyone else is enjoying. 
 Developed in react-native and firebase.
